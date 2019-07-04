@@ -12,6 +12,7 @@
 
 ### 使用说明
 
-- npm i 
+- cnpm i 
 
-- npm start
+- yarn start
+
