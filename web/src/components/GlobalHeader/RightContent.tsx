@@ -4,9 +4,8 @@ import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { ConnectProps, ConnectState } from '@/models/connect';
 
-import Avatar from './AvatarDropdown';
+import AvatarDropdown from './AvatarDropdown';
 import HeaderSearch from '../HeaderSearch';
-import SelectLang from '../SelectLang';
 import styles from './index.less';
 
 export type SiderTheme = 'light' | 'dark';
@@ -62,8 +61,7 @@ const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = props => {
           <Icon type="question-circle-o" />
         </a>
       </Tooltip>
-      <Avatar />
-      <SelectLang className={styles.action} />
+      <AvatarDropdown />
     </div>
   );
 };

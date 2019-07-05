@@ -5,9 +5,8 @@ import React from 'react';
 import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 
-import SelectLang from '@/components/SelectLang';
 import { ConnectProps, ConnectState } from '@/models/connect';
-import logo from '../assets/logo.svg';
+import logo from '../assets/logo.png';
 import styles from './UserLayout.less';
 
 export interface UserLayoutProps extends ConnectProps {
@@ -40,17 +39,16 @@ const UserLayout: React.SFC<UserLayoutProps> = props => {
     >
       <div className={styles.container}>
         <div className={styles.lang}>
-          <SelectLang />
         </div>
         <div className={styles.content}>
           <div className={styles.top}>
             <div className={styles.header}>
               <Link to="/">
                 <img alt="logo" className={styles.logo} src={logo} />
-                <span className={styles.title}>Ant Design</span>
+                <span className={styles.title}>MySchool</span>
               </Link>
             </div>
-            <div className={styles.desc}>Ant Design 是西湖区最具影响力的 Web 设计规范</div>
+            <div className={styles.desc}>汗水是滋润灵魂的甘露，双手是理想飞翔的翅膀。</div>
           </div>
           {children}
         </div>
