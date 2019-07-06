@@ -1,24 +1,60 @@
 import React from 'react';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import router from 'umi/router';
+import {connect} from 'dva';
 import styles from './login.less';
+
+// @ts-ignore
+@connect(
+  ({
+     LoginRegister,
+     loading,
+   }: {
+    LoginRegister: any;
+    loading: {
+      effects: {
+        [key: string]: string;
+      };
+    };
+  }) => ({
+    LoginRegister,
+    submitting: loading.effects['LoginRegister/login'],
+  })
+)
 @Form.create()
 class Login extends React.Component{
   state={};
-  handleSubmit = e => {
+
+  handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    const {dispatch} = this.props;
+    this.props.form.validateFields((err: any, values: object) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        dispatch({
+          type: 'LoginRegister/login',
+          payload: values,
+        })
       }
     });
   };
+  handleResigter = (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+    router.push('/User/Register');
+
+  }
+
+  componentWillReceiveProps(nextProps: Readonly<P>, nextContext: any): void {
+    console.log(nextProps);
+  }
+
   render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
     const { getFieldDecorator } = this.props.form;
     return(
       <div className={styles.main}>
         <Form onSubmit={this.handleSubmit} className="login-form">
           <Form.Item>
-            {getFieldDecorator('username', {
+            {getFieldDecorator('userName', {
               rules: [{ required: true, message: 'Please input your username!' }],
             })(
               <Input
@@ -44,17 +80,17 @@ class Login extends React.Component{
               initialValue: true,
             })(<Checkbox>记住我</Checkbox>)}
             <a href='#' style={{float:'right'}}>
-             忘记密码
+              忘记密码
             </a>
             <Button type="primary" htmlType="submit" className="login-form-button" style={{width:'100%'}}>
               登录
             </Button>
           </Form.Item>
-          <p style={{textAlign:'right'}}>新同学? <a href='#'>现在注册</a></p>
+          <p style={{textAlign: 'right'}}>新同学? <a href='#' onClick={this.handleResigter}>现在注册</a></p>
         </Form>
 
       </div>
-      )
+    )
 
   }
 }
