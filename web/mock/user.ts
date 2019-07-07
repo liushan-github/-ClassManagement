@@ -23,6 +23,9 @@ function getCurrentStudent(
   res: { json: (arg: any) => void },
 ) {
   console.info(req.params);
+  if (req.params.currentStudent == 0) {
+    return res.json({code: 0});
+  }
   return res.json(student[req.params.currentStudent]);
 }
 export default {

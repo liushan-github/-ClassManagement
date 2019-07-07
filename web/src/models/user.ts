@@ -1,6 +1,5 @@
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
-
 import {queryCurrent, queryStudent, query as queryUsers} from '@/services/user';
 import {getAuthority} from "@/utils/authority";
 
@@ -68,7 +67,7 @@ const UserModel: UserModelType = {
         payload: response,
       });
     },
-    * fetchStudent(_, {call, put}) {
+    * fetchStudent({_, callback}, {call, put}) {
       const currentStudent = getAuthority('currentStudent');
       //暂时先在这里测试
       let number = 0;
@@ -82,6 +81,9 @@ const UserModel: UserModelType = {
         number = 76;
       }
       const response = yield call(queryStudent, number);
+      if (response && response.code == 0) {
+        callback(response);
+      }
       yield put({
         type: 'saveCurrentStudent',
         payload: response,

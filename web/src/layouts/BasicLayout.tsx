@@ -18,8 +18,8 @@ import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { ConnectState, Dispatch } from '@/models/connect';
 import logo from '../assets/logo.svg';
-import {Icon} from 'antd';
-
+import {Icon, message} from 'antd';
+import router from 'umi/router';
 export interface BasicLayoutProps extends ProLayoutProps {
   breadcrumbNameMap: {
     [path: string]: MenuDataItem;
@@ -75,6 +75,10 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
     if (dispatch) {
       dispatch({
         type: 'user/fetchStudent',
+        callback: function (response: any) {
+          message.info('请先登录');
+          router.push('/user/login');
+        }
       });
       dispatch({
         type: 'settings/getSetting',
