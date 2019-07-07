@@ -14,16 +14,15 @@ const students = [
 ];
 export default {
   'POST  /api/login': (
-    req: { body: { password: any; userName: any; remember: boolean } },
+    req: { body: { password: string; userName: string; remember: boolean } },
     res: {
       send: (data: any) => void;
     },
   ) => {
-    const password = req.body.password;
-    const userName = req.body.userName;
+    const {password, userName} = req.body;
     if (password && userName) {
       for (let item of students) {
-        if (item.userName === userName && item.password === password) {
+        if (item.userName == userName && item.password == password) {
           res.send(
             {
               code: 1,
@@ -38,5 +37,6 @@ export default {
         currentStudent: ' ',
       });
     }
-  }
+  },
+  'GET  /api/login': students,
 }

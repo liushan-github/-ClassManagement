@@ -1,7 +1,8 @@
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
 
-import { queryCurrent, query as queryUsers } from '@/services/user';
+import {queryCurrent, queryStudent, query as queryUsers} from '@/services/user';
+import {getAuthority} from "@/utils/authority";
 
 export interface CurrentUser {
   avatar?: string;
@@ -16,8 +17,17 @@ export interface CurrentUser {
   unreadCount?: number;
 }
 
+export interface CurrentStudent {
+  name?: string;
+  number?: string;
+  sex?: number;
+  identity?: number;
+  avatar?: string;
+  signature?: string;
+}
 export interface UserModelState {
   currentUser?: CurrentUser;
+  currentStudent?: CurrentStudent;
 }
 
 export interface UserModelType {
@@ -26,9 +36,11 @@ export interface UserModelType {
   effects: {
     fetch: Effect;
     fetchCurrent: Effect;
+    fetchStudent: Effect;
   };
   reducers: {
     saveCurrentUser: Reducer<UserModelState>;
+    saveCurrentStudent: Reducer<UserModelState>;
     changeNotifyCount: Reducer<UserModelState>;
   };
 }
@@ -38,6 +50,7 @@ const UserModel: UserModelType = {
 
   state: {
     currentUser: {},
+    currentStudent: {},
   },
 
   effects: {
@@ -55,6 +68,25 @@ const UserModel: UserModelType = {
         payload: response,
       });
     },
+    * fetchStudent(_, {call, put}) {
+      const currentStudent = getAuthority('currentStudent');
+      //暂时先在这里测试
+      let number = 0;
+      if (currentStudent == '柳杉') {
+        number = 53;
+      }
+      if (currentStudent == '鲁佳明') {
+        number = 54;
+      }
+      if (currentStudent == '朱贤康') {
+        number = 76;
+      }
+      const response = yield call(queryStudent, number);
+      yield put({
+        type: 'saveCurrentStudent',
+        payload: response,
+      });
+    },
   },
 
   reducers: {
@@ -62,6 +94,12 @@ const UserModel: UserModelType = {
       return {
         ...state,
         currentUser: action.payload || {},
+      };
+    },
+    saveCurrentStudent(state, action) {
+      return {
+        ...state,
+        currentStudent: action.payload || {},
       };
     },
     changeNotifyCount(

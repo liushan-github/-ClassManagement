@@ -1,8 +1,7 @@
 // use localStorage to store the authority info, which might be sent from server in actual project.
 export function getAuthority(str?: string): string | string[] {
   // return localStorage.getItem('antd-pro-authority') || ['admin', 'user'];
-  const authorityString =
-    typeof str === 'undefined' ? localStorage.getItem('antd-pro-authority') : str;
+  const authorityString = localStorage.getItem('currentStudent');
   // authorityString could be admin, "admin", ["admin"]
   let authority;
   try {
@@ -18,12 +17,12 @@ export function getAuthority(str?: string): string | string[] {
   // preview.pro.ant.design only do not use in your production.
   // preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
   if (!authority && ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site') {
-    return ['admin'];
+    return [' '];
   }
   return authority;
 }
 
 export function setAuthority(authority: string | string[]): void {
   const proAuthority = typeof authority === 'string' ? [authority] : authority;
-  return localStorage.setItem('antd-pro-authority', JSON.stringify(proAuthority));
+  return localStorage.setItem('currentStudent', JSON.stringify(proAuthority));
 }

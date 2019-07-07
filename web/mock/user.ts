@@ -1,6 +1,33 @@
 // 代码中会兼容本地 service mock 以及部署站点的静态数据
+const student = {
+  '53': {
+    name: '刘山',
+    number: '8221116053',
+    sex: 1,//性别：1代表男，0代表女
+    identity: 1,//身份：1代表管理员，0代表普通身份，-1代表班外人员
+    avatar: 'http://liush.top/image/avatar/liu-logo.png',//头像
+    signature: '坚持就是胜利！'//口头禅
+  },
+  '54': {
+    name: '鲁佳明',
+    //自己补充
+  },
+  '76': {
+    name: '朱贤康',
+    //自己补充
+  },
+}
+
+function getCurrentStudent(
+  req: { params: { currentStudent: string | number } },
+  res: { json: (arg: any) => void },
+) {
+  console.info(req.params);
+  return res.json(student[req.params.currentStudent]);
+}
 export default {
   // 支持值为 Object 和 Array
+  'GET /api/currentStudent/:currentStudent': getCurrentStudent,
   'GET /api/currentUser': {
     name: 'Serati Ma',
     avatar: 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',

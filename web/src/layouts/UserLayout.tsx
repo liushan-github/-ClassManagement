@@ -4,7 +4,6 @@ import Link from 'umi/link';
 import React from 'react';
 import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
-
 import { ConnectProps, ConnectState } from '@/models/connect';
 import logo from '../assets/logo.png';
 import styles from './UserLayout.less';

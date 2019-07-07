@@ -4,6 +4,11 @@ import router from 'umi/router';
 import {connect} from 'dva';
 import styles from './login.less';
 
+export interface FromDataType {
+  userName: string;
+  password: string;
+  remember: boolean,
+}
 // @ts-ignore
 @connect(
   ({
@@ -27,10 +32,9 @@ class Login extends React.Component{
 
   handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    const {dispatch} = this.props;
-    this.props.form.validateFields((err: any, values: object) => {
+    this.props.form.validateFields((err: any, values: FromDataType) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        const {dispatch} = this.props;
         dispatch({
           type: 'LoginRegister/login',
           payload: values,
@@ -41,12 +45,8 @@ class Login extends React.Component{
   handleResigter = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     router.push('/User/Register');
-
   }
 
-  componentWillReceiveProps(nextProps: Readonly<P>, nextContext: any): void {
-    console.log(nextProps);
-  }
 
   render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
     const { getFieldDecorator } = this.props.form;

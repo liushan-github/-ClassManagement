@@ -4,14 +4,13 @@ import { FormattedMessage } from 'umi-plugin-react/locale';
 import React from 'react';
 import { connect } from 'dva';
 import router from 'umi/router';
-
 import { ConnectProps, ConnectState } from '@/models/connect';
-import { CurrentUser } from '@/models/user';
+import {CurrentStudent} from '@/models/user';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 
 export interface GlobalHeaderRightProps extends ConnectProps {
-  currentUser?: CurrentUser;
+  currentStudent?: CurrentStudent;
   menu?: boolean;
 }
 
@@ -33,15 +32,16 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
   };
 
   render(): React.ReactNode {
-    const { currentUser = {}, menu } = this.props;
-    if (!menu) {
-      return (
-        <span className={`${styles.action} ${styles.account}`}>
-          <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar" />
-          <span className={styles.name}>{currentUser.name}</span>
-        </span>
-      );
-    }
+    //删掉了menu
+    const {currentStudent = {}} = this.props;
+    // if (!menu) {
+    //   return (
+    //     <span className={`${styles.action} ${styles.account}`}>
+    //       <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar" />
+    //       <span className={styles.name}>{currentUser.name}</span>
+    //     </span>
+    //   );
+    // }
     const menuHeaderDropdown = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
         <Menu.Item key="center">
@@ -60,11 +60,16 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
       </Menu>
     );
 
-    return currentUser && currentUser.name ? (
+    return currentStudent && currentStudent.name ? (
       <HeaderDropdown overlay={menuHeaderDropdown}>
         <span className={`${styles.action} ${styles.account}`}>
-          <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar" />
-          <span className={styles.name}>{currentUser.name}</span>
+          {currentStudent && currentStudent.avatar
+            ?
+            <Avatar size="small" className={styles.avatar} src={currentStudent.avatar} alt="avatar"/>
+            :
+            <Avatar icon="user"/>
+          }
+          <span className={styles.name}>{currentStudent.name}</span>
         </span>
       </HeaderDropdown>
     ) : (
@@ -73,5 +78,5 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
   }
 }
 export default connect(({ user }: ConnectState) => ({
-  currentUser: user.currentUser,
+  currentStudent: user.currentStudent,
 }))(AvatarDropdown);
