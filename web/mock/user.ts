@@ -12,11 +12,15 @@ const student = {
     name: '鲁佳明',
     //自己补充
   },
-  '76': {
+  '73': {
     name: '朱贤康',
-    //自己补充
+    number: '8221116073',
+    sex: 1, //性别：1代表男，0代表女
+    identity: 1, //身份：1代表管理员，0代表普通身份，-1代表班外人员
+    avatar: 'http://liush.top/image/avatar/zhu-timg.jpg', //头像
+    signature: '多看本草纲目', //口头禅
   },
-}
+};
 
 function getCurrentStudent(
   req: { params: { currentStudent: string | number } },
@@ -102,7 +106,7 @@ export default {
       address: 'Sidney No. 1 Lake Park',
     },
   ],
-  'POST /api/login/account': (req, res) => {
+  'POST /api/login/account': (req: { body: { password: string, userName: string, type: string } }, res: { send: any }) => {
     const { password, userName, type } = req.body;
     if (password === 'ant.design' && userName === 'admin') {
       res.send({
@@ -126,10 +130,10 @@ export default {
       currentAuthority: 'guest',
     });
   },
-  'POST /api/register': (req, res) => {
+  'POST /api/register': (req: any, res: { send: any }) => {
     res.send({ status: 'ok', currentAuthority: 'user' });
   },
-  'GET /api/500': (req, res) => {
+  'GET /api/500': (req: any, res: { status: any }) => {
     res.status(500).send({
       timestamp: 1513932555104,
       status: 500,
@@ -138,7 +142,7 @@ export default {
       path: '/base/category/list',
     });
   },
-  'GET /api/404': (req, res) => {
+  'GET /api/404': (req: any, res: { status: any }) => {
     res.status(404).send({
       timestamp: 1513932643431,
       status: 404,
@@ -147,7 +151,7 @@ export default {
       path: '/base/category/list/2121212',
     });
   },
-  'GET /api/403': (req, res) => {
+  'GET /api/403': (req: any, res: { status: any }) => {
     res.status(403).send({
       timestamp: 1513932555104,
       status: 403,
@@ -156,7 +160,7 @@ export default {
       path: '/base/category/list',
     });
   },
-  'GET /api/401': (req, res) => {
+  'GET /api/401': (req: object, res: { status: any }) => {
     res.status(401).send({
       timestamp: 1513932555104,
       status: 401,

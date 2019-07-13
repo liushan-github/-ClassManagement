@@ -78,7 +78,7 @@ const UserModel: UserModelType = {
         number = 54;
       }
       if (currentStudent == '朱贤康') {
-        number = 76;
+        number = 73;
       }
       const response = yield call(queryStudent, number);
       if (response && response.code == 0) {

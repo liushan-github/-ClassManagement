@@ -16,3 +16,8 @@
 <li>完善登录跳转页面</li>
 <li>用户登录logo图放在<a href='http://liush.top/image/avatar/liu-logo.png'>http://liush.top/image/avatar下</a></li>
 </ol>
+<h3>第五天(2019-7-13)</h3>
+<ol>
+<li>增加注册界面</li>
+<li>解决typescript问题</li>
+</ol>
