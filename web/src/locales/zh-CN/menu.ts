@@ -1,5 +1,6 @@
 export default {
   'menu.welcome': '欢迎',
+  'menu.panel': '仪表盘',
   'menu.more-blocks': '更多区块',
   'menu.home': '首页',
   'menu.login': '登录',
@@ -40,6 +41,8 @@ export default {
   'menu.exception.trigger': '触发错误',
   'menu.account': '个人页',
   'menu.account.center': '个人中心',
+  'menu.account.message': '我的消息',
+  'menu.account.friends': '我的好友',
   'menu.account.settings': '个人设置',
   'menu.account.trigger': '触发报错',
   'menu.account.logout': '退出登录',

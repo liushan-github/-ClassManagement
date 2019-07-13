@@ -18,6 +18,32 @@
 </ol>
 <h3>第五天(2019-7-13)</h3>
 <ol>
-<li>增加注册界面</li>
-<li>解决typescript问题</li>
+<li>增加个人信息和好友，构建</li>
+<li>解决typescript问题，实践typescript</li>
+<li>
+收获：Suspense是为了解决网络io问题
+
+1.React.Suspense也是一种虚拟组件（类似于Fragment，仅用作类型标识），用法如下：
+
+
+    const OtherComponent = React.lazy(() => import('./OtherComponent'));
+    
+    function MyComponent() {
+      return (
+        <div>
+          <Suspense fallback={<div>Loading...</div>}>
+            <OtherComponent />
+          </Suspense>
+        </div>
+      );
+    }
+    
+
+
+2.Suspense子树中只要存在还没回来的Lazy组件，就走fallback指定的内容。这不正是可以提升到任意祖先级的loading吗？
+
+3.Suspense组件可以放在（组件树中）Lazy组件上方的任意位置，并且下方可以有多个Lazy组件。对应到loading场景，就是这两种能力:
+- 支持loading提升
+- 支持loading聚合
+</li>
 </ol>

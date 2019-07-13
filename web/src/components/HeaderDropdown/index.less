@@ -1,16 +1,41 @@
 @import '~antd/es/style/themes/default.less';
 
 .container > * {
+  border-top: 3px solid #1890ff;
   background-color: #fff;
   border-radius: 4px;
   box-shadow: @shadow-1-down;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    width: 0;
+    height: 0;
+    border-bottom: 7px solid #1890ff;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+  }
 }
 
 @media screen and (max-width: @screen-xs) {
   .container {
-    width: 100% !important;
+    width: 38% !important;
   }
   .container > * {
     border-radius: 0 !important;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      right: 18px;
+      width: 0;
+      height: 0;
+      border-bottom: 7px solid #1890ff;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+    }
   }
 }

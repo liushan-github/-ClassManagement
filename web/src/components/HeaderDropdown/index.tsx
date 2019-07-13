@@ -13,7 +13,7 @@ export interface HeaderDropdownProps extends DropDownProps {
 }
 
 const HeaderDropdown: React.FC<HeaderDropdownProps> = ({ overlayClassName: cls, ...restProps }) => (
-  <Dropdown overlayClassName={classNames(styles.container, cls)} {...restProps} />
+  <Dropdown overlayClassName={classNames(styles.container, cls)} trigger={['click']} {...restProps} />
 );
 
 export default HeaderDropdown;

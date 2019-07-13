@@ -1,4 +1,4 @@
-import { Avatar, Icon, Menu, Spin } from 'antd';
+import {Avatar, Icon, Menu, Spin, Badge} from 'antd';
 import { ClickParam } from 'antd/es/menu';
 import { FormattedMessage } from 'umi-plugin-react/locale';
 import React from 'react';
@@ -34,16 +34,19 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
   render(): React.ReactNode {
     //删掉了menu
     const {currentStudent = {}} = this.props;
-    // if (!menu) {
-    //   return (
-    //     <span className={`${styles.action} ${styles.account}`}>
-    //       <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar" />
-    //       <span className={styles.name}>{currentUser.name}</span>
-    //     </span>
-    //   );
-    // }
+    const {status, messages, friends} = currentStudent;
     const menuHeaderDropdown = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
+        <Menu.Item key="message">
+          <Icon type="message"/>
+          <FormattedMessage id="menu.account.message" defaultMessage="account message"/>
+          <Badge count={messages} offset={[40, -6]}/>
+        </Menu.Item>
+        <Menu.Item key="message">
+          <Icon type="team"/>
+          <FormattedMessage id="menu.account.friends" defaultMessage="account friends"/>
+          <Badge count={friends} offset={[40, -6]}/>
+        </Menu.Item>
         <Menu.Item key="center">
           <Icon type="user" />
           <FormattedMessage id="menu.account.center" defaultMessage="account center" />
@@ -65,7 +68,10 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
         <span className={`${styles.action} ${styles.account}`}>
           {currentStudent && currentStudent.avatar
             ?
-            <Avatar size="small" className={styles.avatar} src={currentStudent.avatar} alt="avatar"/>
+            <Badge status={status ? "success" : "error"} offset={[-12, 20]}><Avatar size="small"
+                                                                                    className={styles.avatar}
+                                                                                    src={currentStudent.avatar}
+                                                                                    alt="avatar"/></Badge>
             :
             <Avatar icon="user"/>
           }

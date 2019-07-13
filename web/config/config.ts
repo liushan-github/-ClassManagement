@@ -114,6 +114,12 @@ export default {
           component: './Welcome',
         },
         {
+          path: '/Panel',
+          name: 'panel',
+          icon: 'dashboard',
+          component: './Panel/Panel',
+        },
+        {
           component: './404',
         },
       ],

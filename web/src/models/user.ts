@@ -23,6 +23,9 @@ export interface CurrentStudent {
   identity?: number;
   avatar?: string;
   signature?: string;
+  messages?: number,
+  status?: number,
+  friends?: number,
 }
 export interface UserModelState {
   currentUser?: CurrentUser;
