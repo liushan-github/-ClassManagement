@@ -1,11 +1,13 @@
 import React, {Component, Suspense} from 'react';
-import {AnalysisData, PanelData} from './data.d';
+import {AnalysisData} from './data.d';
 import {Dispatch} from 'redux';
 import {connect} from 'dva';
+import PageLoading from '@/components/PageLoading';
 import {GridContent} from '@ant-design/pro-layout';
 
+const ClassSituationRow = React.lazy(() => import('./component/ClassSituationRow'))
 interface myProps {
-  data: AnalysisData;
+  Panel: AnalysisData;
   dispatch: Dispatch<any>;
   loading: boolean;
 }
@@ -14,7 +16,18 @@ interface myStatus {
 
 }
 
-@connect(({Panel}: { Panel: PanelData }) => ({Panel: Panel}))
+@connect(
+  ({Panel, loading}:
+     {
+       Panel: AnalysisData,
+       loading: {
+         effects: { [key: string]: boolean };
+       };
+     }) =>
+    ({
+      Panel: Panel,
+      loading: loading.effects['Panel/fetch'],
+    }))
 class Panel extends Component<myProps, myStatus> {
   state: myStatus = {};
 
@@ -32,11 +45,17 @@ class Panel extends Component<myProps, myStatus> {
     });
   }
 
+  componentWillReceiveProps(nextProps: Readonly<myProps>, nextContext: any): void {
+    console.log(nextProps);
+  }
+
   render() {
+    const {loading, Panel} = this.props;
+    const {topRowData} = Panel;
     return (<GridContent>
       <React.Fragment>
-        <Suspense fallback={<div>Loading...</div>}>
-          <div>'a'</div>
+        <Suspense fallback={<PageLoading/>}>
+          <ClassSituationRow loading={loading} topRowData={topRowData}/>
         </Suspense>
       </React.Fragment>
     </GridContent>)

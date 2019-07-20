@@ -42,7 +42,7 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
           <FormattedMessage id="menu.account.message" defaultMessage="account message"/>
           <Badge count={messages} offset={[40, -6]}/>
         </Menu.Item>
-        <Menu.Item key="message">
+        <Menu.Item key="team">
           <Icon type="team"/>
           <FormattedMessage id="menu.account.friends" defaultMessage="account friends"/>
           <Badge count={friends} offset={[40, -6]}/>

@@ -1,35 +1,32 @@
-import {PanelData} from './data.d';
+import {AnalysisData} from './data.d';
 import {EffectsCommandMap} from 'dva';
 import {AnyAction, Reducer} from 'redux';
 import {fakeTotalData} from './service';
 
-export interface ModelState {
-  data: PanelData[],
-}
-
 export type Effect = (
   action: AnyAction,
-  effects: EffectsCommandMap & { select: <T>(func: (state: ModelState) => T) => T },
+  effects: EffectsCommandMap & { select: <T>(func: (state: AnalysisData) => T) => T },
 ) => void;
 
 export interface ModelType {
   namespace: string,
-  state: ModelState,
+  state: AnalysisData,
   effects: {
     fetch: Effect,
   },
   reducers: {
-    save: Reducer<ModelState>,
-    clear: Reducer<ModelState>,
+    save: Reducer<AnalysisData>,
+    clear: Reducer<AnalysisData>,
   },
 
 }
 
+const initState = {
+  topRowData: [],
+};
 const Model: ModelType = {
   namespace: 'Panel',
-  state: {
-    data: [],
-  },
+  state: initState,
   effects: {
     * fetch(_, {call, put}) {
       const response = yield call(fakeTotalData);
@@ -43,12 +40,12 @@ const Model: ModelType = {
     save(state, {payload}) {
       return {
         ...state,
-        data: payload,
+        topRowData: payload,
       }
     },
     clear() {
       return {
-        data: [],
+        topRowData: [],
       }
     }
   }
