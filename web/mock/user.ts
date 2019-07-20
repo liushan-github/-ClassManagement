@@ -13,7 +13,7 @@ const student = {
   },
   '54': {
     name: '鲁佳明',
-    number: '8221116053',
+    number: '8221116054',
     sex: 1,//性别：1代表男，0代表女
     identity: 1,//身份：1代表管理员，0代表普通身份，-1代表班外人员
     avatar: 'https://avatars3.githubusercontent.com/u/36237926?s=400&u=c29314dc4b5cdace62f6c7440602dfbbbfe72cbd&v=4',//头像
