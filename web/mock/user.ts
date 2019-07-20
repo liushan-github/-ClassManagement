@@ -13,7 +13,14 @@ const student = {
   },
   '54': {
     name: '鲁佳明',
-    //自己补充
+    number: '8221116054',
+    sex: 1,//性别：1代表男，0代表女
+    identity: 1,//身份：1代表管理员，0代表普通身份，-1代表班外人员
+    avatar: 'https://avatars3.githubusercontent.com/u/36237926?s=400&u=c29314dc4b5cdace62f6c7440602dfbbbfe72cbd&v=4',//头像
+    signature: '坚持就是胜利！',//口头禅
+    messages: 10,//邮箱消息
+    status: 1,//状态
+    friends: 120110,
   },
   '73': {
     name: '朱贤康',
