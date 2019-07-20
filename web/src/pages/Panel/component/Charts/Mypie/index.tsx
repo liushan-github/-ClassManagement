@@ -7,7 +7,7 @@ import {
   Tooltip,
   Coord,
 } from "bizcharts";
-import DataSet from "@antv/data-set";
+import {DataView} from '@antv/data-set';
 
 export interface myProps {
   data: object,
@@ -15,9 +15,8 @@ export interface myProps {
 
 class MyPie extends React.Component<myProps> {
   render() {
-    const {data} = this.props;
-    const {DataView} = DataSet;
-
+    const {data: propsData} = this.props;
+    let data = propsData || [];
     const dv = new DataView();
     dv.source(data).transform({
       type: "percent",
