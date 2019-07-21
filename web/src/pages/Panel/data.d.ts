@@ -7,6 +7,10 @@ export interface PanelDataType {
   beginDate: string,
   statisticsDate: string,
   jobData: Array<object>,
+  getJobDate: Array<object>,
+  rankingListData: Array<object>,
+  cityData: Array<object>,
+  sortCity: Array<object>,
 }
 
 export interface AnalysisData {

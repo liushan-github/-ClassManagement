@@ -12,4 +12,8 @@ export default {
   'Panel.JobDirection': '就业方向',
   'Panel.JobStatistics': '就业统计',
   'Panel.statisticsDate': '统计日期',
+  'Panel.GetJobDate': '就业时间段统计',
+  'Panel.JobDateRanking': '就业日期人数排行',
+  'Panel.cityJob': '就业城市统计',
+  'Panel.CityPeopleRanking': '就业城市人数排行',
 };

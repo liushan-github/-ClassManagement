@@ -10,8 +10,8 @@ import WaterWave from './WaterWave';
 import TagCloud from './TagCloud';
 import TimelineChart from './TimelineChart';
 import MyPie from './MyPie';
-
-
+import MyBar from './MyBar';
+import LineChart from './LineChart';
 const Charts = {
   Bar,
   Pie,
@@ -24,7 +24,9 @@ const Charts = {
   WaterWave,
   TagCloud,
   TimelineChart,
-  MyPie
+  MyPie,
+  MyBar,
+  LineChart,
 };
 
 export {
@@ -40,5 +42,7 @@ export {
   WaterWave,
   TagCloud,
   TimelineChart,
-  MyPie
+  MyPie,
+  MyBar,
+  LineChart,
 };

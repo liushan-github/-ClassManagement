@@ -5,7 +5,8 @@ import {connect} from 'dva';
 import PageLoading from '@/components/PageLoading';
 import {GridContent} from '@ant-design/pro-layout';
 
-const ClassSituationRow = React.lazy(() => import('./component/ClassSituationRow'))
+const ClassSituationRow = React.lazy(() => import('./component/ClassSituationRow'));
+const ClassJobRow = React.lazy(() => import('./component/ClassJobRow'))
 interface myProps {
   Panel: AnalysisData;
   dispatch: Dispatch<any>;
@@ -56,6 +57,9 @@ class Panel extends Component<myProps, myStatus> {
       <React.Fragment>
         <Suspense fallback={<PageLoading/>}>
           <ClassSituationRow loading={loading} topRowData={topRowData}/>
+        </Suspense>
+        <Suspense fallback={<PageLoading/>}>
+          <ClassJobRow loading={loading} topRowData={topRowData}/>
         </Suspense>
       </React.Fragment>
     </GridContent>)

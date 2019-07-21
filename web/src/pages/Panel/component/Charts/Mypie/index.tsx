@@ -75,4 +75,5 @@ class MyPie extends React.Component<myProps> {
 }
 
 
+// @ts-ignore
 export default autoHeight()(MyPie);
