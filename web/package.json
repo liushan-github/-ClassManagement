@@ -66,6 +66,7 @@
     "react-document-title": "^2.0.3",
     "react-dom": "^16.8.6",
     "react-fittext": "^1.0.0",
+    "react-masonry-component": "^6.2.1",
     "react-media": "^1.9.2",
     "react-media-hook2": "^1.0.5",
     "redux": "^4.0.1",

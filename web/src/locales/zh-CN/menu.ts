@@ -1,6 +1,7 @@
 export default {
   'menu.welcome': '欢迎',
   'menu.panel': '仪表盘',
+  'menu.classWall': '班级墙',
   'menu.more-blocks': '更多区块',
   'menu.home': '首页',
   'menu.login': '登录',

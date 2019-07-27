@@ -120,6 +120,12 @@ export default {
           component: './Panel/Panel',
         },
         {
+          path: '/ClassWall',
+          name: 'classWall',
+          icon: 'home',
+          component: './ClassWall/',
+        },
+        {
           component: './404',
         },
       ],
@@ -186,3 +192,4 @@ export default {
   },
   */
 } as IConfig;
+
