@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, Row, Col} from 'antd';
+import {Card, Row, Col, Modal} from 'antd';
 import Masonry from 'react-masonry-component';
 import PageLoading from "@/components/PageLoading";
 import {Dispatch} from 'redux';
@@ -26,6 +26,10 @@ interface myProps {
   loading: loading.effects['classWall/fetch'],
 }))
 class ClassWall extends Component<myProps> {
+  state = {
+    visible: false,//模态框显示
+    src: 'http://liush.top/image/classwall/class.png',
+  }
 
   componentDidMount() {
     const {dispatch} = this.props;
@@ -41,9 +45,36 @@ class ClassWall extends Component<myProps> {
     });
   }
 
+  // getSrc=()=>{
+  //   const {key}=this.state;
+  //   const {classWall} = this.props;
+  //   const {classWallData} = classWall;
+  //   console.log(classWallData[key]);
+  //   // return classWallData[key]&&classWallData[key].src;
+  // }
+  showModal = (i: number) => {
+    const {classWall} = this.props;
+    const {classWallData} = classWall;
+    this.setState({
+      visible: true,
+      src: classWallData[i].src,
+    });
+  };
+  handleOk = (e: Event) => {
+    this.setState({
+      visible: false,
+    });
+  };
+
+  handleCancel = (e: Event) => {
+    this.setState({
+      visible: false,
+    });
+  };
   render() {
     const {classWall, loading} = this.props;
     const {classWallData} = classWall;
+    const {src} = this.state;
     return (
 
       loading ? <PageLoading/> : (<Row gutter={16}>
@@ -51,20 +82,34 @@ class ClassWall extends Component<myProps> {
           options={masonryOptions}
         >
           {
-            classWallData.map((element, key) => {
+            classWallData && classWallData.map((element, key) => {
               return (
                 <Col xl={6} sm={8} xs={12} key={key}>
                   <Card
                     hoverable
+                    onClick={() => this.showModal(key)}
                     style={{marginBottom: 10}}
                     cover={element.src ? <img alt="example" src={element.src}/> : <PageLoading/>}
                   >
                     <Meta title={element.name} description={element.descr}/>
                   </Card>
+
                 </Col>
               )
             })
           }
+          <Modal
+            title="放大图"
+            width='540px'
+            mask={false}
+            maskStyle={{}}
+            visible={this.state.visible}
+            onOk={this.handleOk}
+            onCancel={this.handleCancel}
+            footer={null}
+          >
+            <img alt="example" src={src} style={{width: 500}}/>
+          </Modal>
         </Masonry>
       </Row>)
     )
