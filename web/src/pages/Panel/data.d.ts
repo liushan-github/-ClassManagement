@@ -3,14 +3,14 @@ export interface PanelDataType {
   girl: number;
   boy: number;
   avgAge: number,
-  ageData: Array<object>,
+  ageData: object[],
   beginDate: string,
   statisticsDate: string,
-  jobData: Array<object>,
-  getJobDate: Array<object>,
-  rankingListData: Array<object>,
-  cityData: Array<object>,
-  sortCity: Array<object>,
+  jobData: object[],
+  getJobDate: object[],
+  rankingListData: object[],
+  cityData: object[],
+  sortCity: object[],
 }
 
 export interface AnalysisData {

@@ -1,7 +1,7 @@
 import {EffectsCommandMap} from 'dva';
 import {AnyAction, Reducer} from 'redux';
 import {fakeclassWallData} from './service';
-import {IClassWallData} from "@/pages/ClassWall/data";
+import {IClassWallData} from '@/pages/ClassWall/data';
 
 export interface ModelState {
   classWallData: IClassWallData[];
@@ -34,12 +34,13 @@ const Model: ModelType = {
   effects: {
     * fetch(_, {call, put}) {
       const response = yield call(fakeclassWallData);
-      if (response && response.success == true)
+      if (response && response.success == true) {
         yield put({
           type: 'save',
           payload: response.data,
         });
-    }
+      }
+    },
   },
   reducers: {
     save(state, {payload}) {
@@ -52,7 +53,7 @@ const Model: ModelType = {
       return {
         classWallData: [],
       }
-    }
-  }
+    },
+  },
 };
 export default Model;

@@ -10,10 +10,10 @@ export interface IBarProps {
   color?: string;
   padding?: [number, number, number, number];
   height?: number;
-  data: Array<{
+  data: {
     x: string;
     y: number;
-  }>;
+  }[];
   forceFit?: boolean;
   autoLabel?: boolean;
   style?: React.CSSProperties;
@@ -26,7 +26,9 @@ class Bar extends Component<IBarProps,
   state = {
     autoHideXLabels: false,
   };
+
   root: HTMLDivElement | undefined;
+
   node: HTMLDivElement | undefined;
 
   componentDidMount() {
@@ -40,6 +42,7 @@ class Bar extends Component<IBarProps,
   handleRoot = (n: HTMLDivElement) => {
     this.root = n;
   };
+
   handleRef = (n: HTMLDivElement) => {
     this.node = n;
   };

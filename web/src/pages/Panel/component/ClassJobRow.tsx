@@ -1,18 +1,17 @@
-import React from "react";
-import {Tabs, Row, Col} from "antd";
+import React from 'react';
+import {Tabs, Row, Col} from 'antd';
 import {FormattedMessage} from 'umi-plugin-react/locale';
+import numeral from 'numeral';
 import styles from '../style.less';
 import {MyBar, LineChart} from './Charts';
+// @ts-ignore
+import {PanelDataType} from '@/pages/Panel/data';
 
 const {TabPane} = Tabs;
-// @ts-ignore
-import numeral from 'numeral';
-import {PanelDataType} from "@/pages/Panel/data";
 
 
-const ClassJobRow = ({loading, topRowData: {getJobDate, rankingListData, cityData, sortCity}}: { loading: boolean, topRowData: PanelDataType }) => {
-  return (
-    <Tabs className={styles.tabRow} size={"large"} tabBarStyle={{backgroundColor: '#fafafa', padding: '0px 10px'}}>
+const ClassJobRow = ({loading, topRowData: {getJobDate, rankingListData, cityData, sortCity}}: { loading: boolean, topRowData: PanelDataType }) => (
+  <Tabs className={styles.tabRow} size="large" tabBarStyle={{backgroundColor: '#fafafa', padding: '0px 10px'}}>
       <TabPane tab={<FormattedMessage id="Panel.GetJobDate" defaultMessage="Get Job"/>} key="1">
         <Row type="flex">
           <Col xl={16} lg={12} md={12} sm={24} xs={24}>
@@ -96,5 +95,4 @@ const ClassJobRow = ({loading, topRowData: {getJobDate, rankingListData, cityDat
       </TabPane>
     </Tabs>
   )
-}
 export default ClassJobRow;

@@ -1,9 +1,9 @@
 import {AnyAction, Reducer} from 'redux';
 import {EffectsCommandMap} from 'dva';
 import {notification} from 'antd';
-import {login} from './service';
 import {routerRedux} from 'dva/router';
-import {setAuthority} from "@/utils/authority";
+import {login} from './service';
+import {setAuthority} from '@/utils/authority';
 
 export interface StateType {
   status?: 0 | 1;
@@ -44,18 +44,18 @@ const Model: ModelType = {
             message: `${response.currentStudent}，登录成功`,
             description:
               '开启你的大门吧！！',
-          }
+          },
         );
         yield put(routerRedux.replace('/'));
       } else {
         notification.error({
-            message: `登录失败`,
+            message: '登录失败',
             description:
               '用户名或者密码有误！！',
-          }
+          },
         );
       }
-    }
+    },
   },
   reducers: {
     save(state, {payload}) {
@@ -65,7 +65,7 @@ const Model: ModelType = {
         currentStudent: payload.currentStudent,
         status: payload.code,
       }
-    }
+    },
   },
 }
 export default Model;

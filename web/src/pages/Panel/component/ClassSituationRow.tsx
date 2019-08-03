@@ -1,5 +1,5 @@
-import React from "react";
-import {Row, Col, Tooltip, Icon} from "antd";
+import React from 'react';
+import {Row, Col, Tooltip, Icon} from 'antd';
 import {FormattedMessage} from 'umi-plugin-react/locale';
 import {ChartCard, Field, MiniArea, MyPie} from './Charts';
 import styles from '../style.less';
@@ -14,8 +14,7 @@ const topColResponsiveProps = {
   xl: 8,
   style: {marginBottom: 24},
 };
-const ClassSituationRow = ({loading, topRowData: {totalStudents, girl, boy, ageData, avgAge, beginDate, jobData, statisticsDate}}: { loading: boolean, topRowData: PanelDataType }) => {
-  return (
+const ClassSituationRow = ({loading, topRowData: {totalStudents, girl, boy, ageData, avgAge, beginDate, jobData, statisticsDate}}: { loading: boolean, topRowData: PanelDataType }) => (
     <Row gutter={16} type="flex">
       <Col {...topColResponsiveProps} >
         <ChartCard bordered={false}
@@ -98,7 +97,7 @@ const ClassSituationRow = ({loading, topRowData: {totalStudents, girl, boy, ageD
 
                      </Tooltip>
                    }
-                   total={'89%'}
+                   total="89%"
                    footer={
                      <Field
                        label={
@@ -112,10 +111,9 @@ const ClassSituationRow = ({loading, topRowData: {totalStudents, girl, boy, ageD
           <MyPie data={jobData}/>
         </ChartCard>
       </Col>
-      {/*<Col {...topColResponsiveProps} >*/}
-      {/*  <div className={styles.ClassSituationRow}>f</div>*/}
-      {/*</Col>*/}
+      {/* <Col {...topColResponsiveProps} > */}
+      {/*  <div className={styles.ClassSituationRow}>f</div> */}
+      {/* </Col> */}
     </Row>
   )
-}
 export default ClassSituationRow;

@@ -126,6 +126,25 @@ export default {
           component: './ClassWall/',
         },
         {
+          path: '/MyClass',
+          name: 'myClass',
+          icon: 'schedule',
+          routes: [
+            {
+              path: '/MyClass/CRUD',
+              name: 'classmanager',
+              icon: 'form',
+              component: './MyClass/classmanager/',
+            },
+            {
+              path: '/MyClass/studyNav',
+              name: 'studyNav',
+              icon: 'tag',
+              component: './MyClass/studyNav/',
+            },
+          ]
+        },
+        {
           component: './404',
         },
       ],

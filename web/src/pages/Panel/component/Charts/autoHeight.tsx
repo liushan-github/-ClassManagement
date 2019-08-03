@@ -7,10 +7,10 @@ export type IReactComponent<P = any> =
 
 function computeHeight(node: HTMLDivElement) {
   node.style.height = '100%';
-  const totalHeight = parseInt(getComputedStyle(node).height + '', 10);
+  const totalHeight = parseInt(`${getComputedStyle(node).height}`, 10);
   const padding =
-    parseInt(getComputedStyle(node).paddingTop + '', 10) +
-    parseInt(getComputedStyle(node).paddingBottom + '', 10);
+    parseInt(`${getComputedStyle(node).paddingTop}`, 10) +
+    parseInt(`${getComputedStyle(node).paddingBottom}`, 10);
   return totalHeight - padding;
 }
 
@@ -42,6 +42,7 @@ function autoHeight() {
       state = {
         computedHeight: 0,
       };
+
       root!: HTMLDivElement;
 
       componentDidMount() {

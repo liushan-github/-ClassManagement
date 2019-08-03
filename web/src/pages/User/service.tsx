@@ -6,7 +6,7 @@ export async function login(params: FromDataType) {
   return request('/api/login', {
       method: 'POST',
     data: params,
-    }
+    },
   );
 }
 

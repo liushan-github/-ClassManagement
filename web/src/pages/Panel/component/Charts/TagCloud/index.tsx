@@ -13,10 +13,10 @@ import styles from './index.less';
 const imgUrl = 'https://gw.alipayobjects.com/zos/rmsportal/gWyeGLCdFFRavBGIDzWk.png';
 
 export interface ITagCloudProps {
-  data: Array<{
+  data: {
     name: string;
     value: number;
-  }>;
+  }[];
   height?: number;
   className?: string;
   style?: React.CSSProperties;
@@ -34,10 +34,13 @@ class TagCloud extends Component<ITagCloudProps, ITagCloudState> {
     height: 0,
     width: 0,
   };
+
   isUnmount!: boolean;
+
   requestRef!: number;
 
   root: HTMLDivElement | undefined;
+
   imageMask: HTMLImageElement | undefined;
 
   componentDidMount() {
@@ -66,6 +69,7 @@ class TagCloud extends Component<ITagCloudProps, ITagCloudState> {
       this.renderChart(this.props);
     });
   };
+
   saveRootRef = (node: HTMLDivElement) => {
     this.root = node;
   };

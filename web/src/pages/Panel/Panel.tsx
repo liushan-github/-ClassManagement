@@ -1,9 +1,9 @@
 import React, {Component, Suspense} from 'react';
-import {AnalysisData} from './data.d';
 import {Dispatch} from 'redux';
 import {connect} from 'dva';
-import PageLoading from '@/components/PageLoading';
 import {GridContent} from '@ant-design/pro-layout';
+import PageLoading from '@/components/PageLoading';
+import {AnalysisData} from './data.d';
 
 const ClassSituationRow = React.lazy(() => import('./component/ClassSituationRow'));
 const ClassJobRow = React.lazy(() => import('./component/ClassJobRow'))
@@ -26,7 +26,7 @@ interface myStatus {
        };
      }) =>
     ({
-      Panel: Panel,
+      Panel,
       loading: loading.effects['Panel/fetch'],
     }))
 class Panel extends Component<myProps, myStatus> {

@@ -1,13 +1,13 @@
-import React from "react";
-import autoHeight from '../autoHeight';
+import React from 'react';
 import {
   Chart,
   Geom,
   Axis,
   Tooltip,
   Coord,
-} from "bizcharts";
+} from 'bizcharts';
 import {DataView} from '@antv/data-set';
+import autoHeight from '../autoHeight';
 
 export interface myProps {
   data: object,
@@ -16,21 +16,21 @@ export interface myProps {
 class MyPie extends React.Component<myProps> {
   render() {
     const {data: propsData} = this.props;
-    let data = propsData || [];
+    const data = propsData || [];
     const dv = new DataView();
     dv.source(data).transform({
-      type: "percent",
-      field: "count",
-      dimension: "item",
-      as: "percent"
+      type: 'percent',
+      field: 'count',
+      dimension: 'item',
+      as: 'percent',
     });
     const cols = {
       percent: {
         formatter: (val: any) => {
-          val = val * 100 + "%";
+          val = `${val * 100}%`;
           return val;
-        }
-      }
+        },
+      },
     };
     return (
       <div>
@@ -53,18 +53,18 @@ class MyPie extends React.Component<myProps> {
             position="percent"
             color="item"
             tooltip={[
-              "item*percent",
+              'item*percent',
               (item, percent) => {
-                percent = (percent * 100).toFixed(2) + "%";
+                percent = `${(percent * 100).toFixed(2)}%`;
                 return {
                   name: item,
-                  value: percent
+                  value: percent,
                 };
-              }
+              },
             ]}
             style={{
               lineWidth: 1,
-              stroke: "#fff",
+              stroke: '#fff',
             }}
           >
           </Geom>

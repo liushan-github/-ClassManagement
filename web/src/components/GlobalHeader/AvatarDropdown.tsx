@@ -32,7 +32,7 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
   };
 
   render(): React.ReactNode {
-    //删掉了menu
+    // 删掉了menu
     const {currentStudent = {}} = this.props;
     const {status, messages, friends} = currentStudent;
     const menuHeaderDropdown = (
@@ -68,7 +68,7 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
         <span className={`${styles.action} ${styles.account}`}>
           {currentStudent && currentStudent.avatar
             ?
-            <Badge status={status ? "success" : "error"} offset={[-12, 20]}><Avatar size="small"
+            <Badge status={status ? 'success' : 'error'} offset={[-12, 20]}><Avatar size="small"
                                                                                     className={styles.avatar}
                                                                                     src={currentStudent.avatar}
                                                                                     alt="avatar"/></Badge>

@@ -12,6 +12,7 @@ import TimelineChart from './TimelineChart';
 import MyPie from './MyPie';
 import MyBar from './MyBar';
 import LineChart from './LineChart';
+
 const Charts = {
   Bar,
   Pie,

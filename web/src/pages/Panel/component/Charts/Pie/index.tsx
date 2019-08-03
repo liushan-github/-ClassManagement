@@ -20,10 +20,10 @@ export interface IPieProps {
   hasLegend?: boolean;
   padding?: [number, number, number, number];
   percent?: number;
-  data?: Array<{
+  data?: {
     x: string | string;
     y: number;
-  }>;
+  }[];
   inner?: number;
   lineWidth?: number;
   forceFit?: boolean;
@@ -37,7 +37,7 @@ export interface IPieProps {
 }
 
 interface IPieState {
-  legendData: Array<{ checked: boolean; x: string; color: string; percent: number; y: string }>;
+  legendData: { checked: boolean; x: string; color: string; percent: number; y: string }[];
   legendBlock: boolean;
 }
 
@@ -48,7 +48,9 @@ class Pie extends Component<IPieProps, IPieState> {
   };
 
   requestRef: number | undefined;
+
   root!: HTMLDivElement;
+
   chart: G2.Chart | undefined;
 
   componentDidMount() {
@@ -107,6 +109,7 @@ class Pie extends Component<IPieProps, IPieState> {
       legendData,
     });
   };
+
   handleRoot = (n: HTMLDivElement) => {
     this.root = n;
   };
@@ -121,7 +124,7 @@ class Pie extends Component<IPieProps, IPieState> {
     const filteredLegendData = legendData.filter(l => l.checked).map(l => l.x);
 
     if (this.chart) {
-      this.chart.filter('x', val => filteredLegendData.indexOf(val + '') > -1);
+      this.chart.filter('x', val => filteredLegendData.indexOf(`${val}`) > -1);
     }
 
     this.setState({
@@ -219,11 +222,11 @@ class Pie extends Component<IPieProps, IPieState> {
       data = [
         {
           x: '占比',
-          y: parseFloat(percent + ''),
+          y: parseFloat(`${percent}`),
         },
         {
           x: '反比',
-          y: 100 - parseFloat(percent + ''),
+          y: 100 - parseFloat(`${percent}`),
         },
       ];
     }

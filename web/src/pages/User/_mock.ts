@@ -10,7 +10,7 @@ const students = [
   {
     userName: '朱贤康',
     password: '1',
-  }
+  },
 ];
 export default {
   'POST  /api/login': (
@@ -21,13 +21,13 @@ export default {
   ) => {
     const {password, userName} = req.body;
     if (password && userName) {
-      for (let item of students) {
+      for (const item of students) {
         if (item.userName == userName && item.password == password) {
           res.send(
             {
               code: 1,
               currentStudent: item.userName,
-            }
+            },
           );
           return;
         }

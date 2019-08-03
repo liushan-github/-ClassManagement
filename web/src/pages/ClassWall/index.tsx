@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
 import {Card, Row, Col, Modal} from 'antd';
 import Masonry from 'react-masonry-component';
-import PageLoading from "@/components/PageLoading";
 import {Dispatch} from 'redux';
 import {connect} from 'dva';
+import PageLoading from '@/components/PageLoading';
 import {ModelState} from './model';
+import style from './index.less';
 
 const {Meta} = Card;
 const masonryOptions = {
-  transitionDuration: 10
+  transitionDuration: 10,
 };
 
+// eslint-disable-next-line @typescript-eslint/class-name-casing
 interface myProps {
   classWall: ModelState;
   dispatch: Dispatch<any>;
@@ -22,12 +24,12 @@ interface myProps {
     effects: { [key: string]: boolean };
   };
 }) => ({
-  classWall: classWall,
+  classWall,
   loading: loading.effects['classWall/fetch'],
 }))
 class ClassWall extends Component<myProps> {
   state = {
-    visible: false,//模态框显示
+    visible: false, // 模态框显示
     src: 'http://liush.top/image/classwall/class.png',
   }
 
@@ -60,6 +62,7 @@ class ClassWall extends Component<myProps> {
       src: classWallData[i].src,
     });
   };
+
   handleOk = (e: Event) => {
     this.setState({
       visible: false,
@@ -71,6 +74,7 @@ class ClassWall extends Component<myProps> {
       visible: false,
     });
   };
+
   render() {
     const {classWall, loading} = this.props;
     const {classWallData} = classWall;
@@ -82,8 +86,7 @@ class ClassWall extends Component<myProps> {
           options={masonryOptions}
         >
           {
-            classWallData && classWallData.map((element, key) => {
-              return (
+            classWallData && classWallData.map((element, key) => (
                 <Col xl={6} sm={8} xs={12} key={key}>
                   <Card
                     hoverable
@@ -95,14 +98,15 @@ class ClassWall extends Component<myProps> {
                   </Card>
 
                 </Col>
-              )
-            })
+            ))
           }
           <Modal
-            title="放大图"
-            width='540px'
-            mask={false}
-            maskStyle={{}}
+            width="auto"
+            mask
+            keyboard
+            centered
+            wrapClassName={style.modalWarps}
+            className={style.antModal}
             visible={this.state.visible}
             onOk={this.handleOk}
             onCancel={this.handleCancel}

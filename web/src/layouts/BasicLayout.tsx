@@ -14,12 +14,13 @@ import Link from 'umi/link';
 import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
 
+import {Icon, message} from 'antd';
+import router from 'umi/router';
 import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { ConnectState, Dispatch } from '@/models/connect';
 import logo from '../assets/logo.svg';
-import {Icon, message} from 'antd';
-import router from 'umi/router';
+
 export interface BasicLayoutProps extends ProLayoutProps {
   breadcrumbNameMap: {
     [path: string]: MenuDataItem;
@@ -45,11 +46,11 @@ const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] =>
     return Authorized.check(item.authority, localItem, null) as MenuDataItem;
   });
 
-const footerRender: BasicLayoutProps['footerRender'] = (_, defaultDom) => {
+const footerRender: BasicLayoutProps['footerRender'] = (_, defaultDom) =>
   // if (!isAntDesignPro()) {
   //   return defaultDom;
   // }
-  return (
+  (
     <>
       <div
         style={{
@@ -63,8 +64,6 @@ const footerRender: BasicLayoutProps['footerRender'] = (_, defaultDom) => {
       </div>
     </>
   );
-};
-
 const BasicLayout: React.FC<BasicLayoutProps> = props => {
   const { dispatch, children, settings } = props;
   /**
@@ -75,10 +74,10 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
     if (dispatch) {
       dispatch({
         type: 'user/fetchStudent',
-        callback: function (response: any) {
+        callback(response: any) {
           message.info('请先登录');
           router.push('/user/login');
-        }
+        },
       });
       dispatch({
         type: 'settings/getSetting',

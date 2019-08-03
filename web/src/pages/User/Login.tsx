@@ -24,10 +24,10 @@ export interface FromDataType {
   }) => ({
     LoginRegister,
     submitting: loading.effects['LoginRegister/login'],
-  })
+  }),
 )
 @Form.create()
-class Login extends React.Component{
+class Login extends React.Component {
   state={};
 
   handleSubmit = (e: { preventDefault: () => void; }) => {
@@ -42,6 +42,7 @@ class Login extends React.Component{
       }
     });
   };
+
   handleResigter = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     router.push('/User/Register');
@@ -50,7 +51,7 @@ class Login extends React.Component{
 
   render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
     const { getFieldDecorator } = this.props.form;
-    return(
+    return (
       <div className={styles.main}>
         <Form onSubmit={this.handleSubmit} className="login-form">
           <Form.Item>
@@ -79,19 +80,18 @@ class Login extends React.Component{
               valuePropName: 'checked',
               initialValue: true,
             })(<Checkbox>记住我</Checkbox>)}
-            <a href='#' style={{float:'right'}}>
+            <a href="#" style={{float: 'right'}}>
               忘记密码
             </a>
-            <Button type="primary" htmlType="submit" className="login-form-button" style={{width:'100%'}}>
+            <Button type="primary" htmlType="submit" className="login-form-button" style={{width: '100%'}}>
               登录
             </Button>
           </Form.Item>
-          <p style={{textAlign: 'right'}}>新同学? <a href='#' onClick={this.handleResigter}>现在注册</a></p>
+          <p style={{textAlign: 'right'}}>新同学? <a href="#" onClick={this.handleResigter}>现在注册</a></p>
         </Form>
 
       </div>
     )
-
   }
 }
 export default Login;

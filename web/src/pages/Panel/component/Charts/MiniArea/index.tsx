@@ -23,7 +23,7 @@ export interface IMiniAreaProps {
   scale?: { x: any; y: any };
   yAxis?: IAxis;
   borderWidth?: number;
-  data: Array<object>;
+  data: object[];
 }
 
 class MiniArea extends React.Component<IMiniAreaProps> {

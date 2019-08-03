@@ -1,6 +1,6 @@
-import {AnalysisData} from './data.d';
 import {EffectsCommandMap} from 'dva';
 import {AnyAction, Reducer} from 'redux';
+import {AnalysisData} from './data.d';
 import {fakeTotalData} from './service';
 
 export type Effect = (
@@ -34,7 +34,7 @@ const Model: ModelType = {
         type: 'save',
         payload: response,
       });
-    }
+    },
   },
   reducers: {
     save(state, {payload}) {
@@ -47,7 +47,7 @@ const Model: ModelType = {
       return {
         topRowData: [],
       }
-    }
-  }
+    },
+  },
 };
 export default Model;

@@ -1,7 +1,7 @@
 import { Effect } from 'dva';
 import { Reducer } from 'redux';
 import {queryCurrent, queryStudent, query as queryUsers} from '@/services/user';
-import {getAuthority} from "@/utils/authority";
+import {getAuthority} from '@/utils/authority';
 
 export interface CurrentUser {
   avatar?: string;
@@ -72,7 +72,7 @@ const UserModel: UserModelType = {
     },
     * fetchStudent({_, callback}, {call, put}) {
       const currentStudent = getAuthority('currentStudent');
-      //暂时先在这里测试
+      // 暂时先在这里测试
       let number = 0;
       if (currentStudent == '柳杉') {
         number = 53;

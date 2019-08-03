@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 import {
   Chart,
   Geom,
   Axis,
   Tooltip,
-} from "bizcharts";
-import autoHeight from "@/pages/Panel/component/Charts/autoHeight";
+} from 'bizcharts';
+import autoHeight from '@/pages/Panel/component/Charts/autoHeight';
 
 export interface myProps {
   data: object,
@@ -15,24 +15,24 @@ export interface myProps {
 class LineChart extends React.Component<myProps> {
   render() {
     const {data: propsData, title} = this.props;
-    let data = propsData || [];
+    const data = propsData || [];
     const cols = {
       value: {
-        min: 0
+        min: 0,
       },
       city: {
-        range: [0, 1]
-      }
+        range: [0, 1],
+      },
     };
     return (
       <div>
-        {title && <h4 style={{paddingLeft: "40px"}}>{title}</h4>}
+        {title && <h4 style={{paddingLeft: '40px'}}>{title}</h4>}
         <Chart height={350} data={data} scale={cols} forceFit>
           <Axis name="city"/>
           <Axis name="value"/>
           <Tooltip
             crosshairs={{
-              type: "y"
+              type: 'y',
             }}
           />
           <Geom type="line" position="city*value" size={2}/>
@@ -40,10 +40,10 @@ class LineChart extends React.Component<myProps> {
             type="point"
             position="city*value"
             size={4}
-            shape={"circle"}
+            shape="circle"
             style={{
-              stroke: "#fff",
-              lineWidth: 1
+              stroke: '#fff',
+              lineWidth: 1,
             }}
           />
         </Chart>
