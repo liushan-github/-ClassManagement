@@ -25,7 +25,7 @@ export interface ModelType {
 }
 
 const Model: ModelType = {
-  namespace: 'classmanager',
+  namespace: 'classManager',
   state: {
     data: [],
   },

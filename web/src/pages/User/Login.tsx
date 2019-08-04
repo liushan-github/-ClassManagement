@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import {Form, Icon, Input, Button, Checkbox} from 'antd';
 import router from 'umi/router';
 import {connect} from 'dva';
 import styles from './login.less';
@@ -9,6 +9,7 @@ export interface FromDataType {
   password: string;
   remember: boolean,
 }
+
 // @ts-ignore
 @connect(
   ({
@@ -28,7 +29,7 @@ export interface FromDataType {
 )
 @Form.create()
 class Login extends React.Component {
-  state={};
+  state = {};
 
   handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
@@ -50,26 +51,26 @@ class Login extends React.Component {
 
 
   render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
-    const { getFieldDecorator } = this.props.form;
+    const {getFieldDecorator} = this.props.form;
     return (
       <div className={styles.main}>
         <Form onSubmit={this.handleSubmit} className="login-form">
           <Form.Item>
             {getFieldDecorator('userName', {
-              rules: [{ required: true, message: 'Please input your username!' }],
+              rules: [{required: true, message: 'Please input your username!'}],
             })(
               <Input
-                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                prefix={<Icon type="user" style={{color: 'rgba(0,0,0,.25)'}}/>}
                 placeholder="Username"
               />,
             )}
           </Form.Item>
           <Form.Item>
             {getFieldDecorator('password', {
-              rules: [{ required: true, message: 'Please input your Password!' }],
+              rules: [{required: true, message: 'Please input your Password!'}],
             })(
               <Input
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25)'}}/>}
                 type="password"
                 placeholder="Password"
               />,
@@ -94,4 +95,5 @@ class Login extends React.Component {
     )
   }
 }
+
 export default Login;
