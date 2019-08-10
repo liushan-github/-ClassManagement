@@ -1,15 +1,19 @@
 import React from "react";
-import {Table, Avatar, Tag} from 'antd';
+import {Table, Avatar, Tag, Button, Popconfirm, message} from 'antd';
 import {connect} from 'dva';
 import {Dispatch} from 'redux'
 import {TableData} from '../data.d';
 
 interface myProps {
   classManager: any,
-  loading: string,
+  loading: boolean,
   dispatch: Dispatch,
 }
 
+interface myStates {
+  selectedRowKeys: Array<number> | null,
+  disabled: boolean,
+}
 @connect((
   {
     classManager,
@@ -27,7 +31,10 @@ interface myProps {
   classManager,
   loading: loading.effects['classManager/fetch'],
 }))
-class DataTable extends React.Component<myProps> {
+class DataTable extends React.Component<myProps, myStates> {
+  state = {
+    selectedRowKeys: [],
+  }
   componentDidMount(): void {
     const {dispatch} = this.props;
     dispatch({
@@ -50,9 +57,22 @@ class DataTable extends React.Component<myProps> {
         return <Tag color='#87d068'>{'游客'}</Tag>;
     }
   }
+  confirm = (e: Event) => {
+    console.log(e);
+    message.success('Click on Yes');
+  }
+  cancel = (e: Event) => {
+    console.log(e);
+    message.error('Click on No');
+  }
+  onSelectChange = (selectedRowKeys: Array<number>) => {
+    console.log('selectedRowKeys changed: ', selectedRowKeys);
+    this.setState({selectedRowKeys});
+  };
   render() {
     const {classManager, loading} = this.props;
     const {data}: { data: TableData[] } = classManager;
+    const {selectedRowKeys} = this.state;
     const columns = [
       {
         title: '姓名',
@@ -72,14 +92,15 @@ class DataTable extends React.Component<myProps> {
       {
         title: '学号',
         dataIndex: 'number',
+        sorter: (a: { number: number }, b: { number: number }) => a.number - b.number,
         key: 'number',
+
         align: 'center',
       },
       {
         title: '头像',
         dataIndex: 'avatar',
         key: 'avatar',
-        align: 'center',
         align: 'center',
         render: (text: string, record: object) => {
           return <Avatar shape='square' size={'large'}
@@ -96,6 +117,22 @@ class DataTable extends React.Component<myProps> {
         dataIndex: 'identity',
         key: 'identity',
         align: 'center',
+        filters: [
+          {
+            text: '管理员',
+            value: 1,
+          },
+          {
+            text: '同学',
+            value: 0,
+          },
+          {
+            text: '游客',
+            value: -1,
+          },
+        ],
+        filterMultiple: false,
+        onFilter: (value: number, record: { identity: number }) => record.identity === value,
         render: (text: number) => {
           return this.showTag(text);
         }
@@ -104,15 +141,78 @@ class DataTable extends React.Component<myProps> {
         title: '操作',
         dataIndex: 'action',
         key: 'action',
+        align: 'center',
+        render: (text: number, record: object) => {
+          return (
+            <>
+              <Button type="default" icon="edit" style={{marginLeft: 10}}/>
+              <Popconfirm
+                title="Are you sure delete?"
+                onConfirm={this.confirm}
+                onCancel={this.cancel}
+                okText="Yes"
+                cancelText="No"
+              >
+                <Button type="danger" icon="minus" style={{marginLeft: 10}}/>
+              </Popconfirm>
+            </>
+          )
+        }
       }
     ]
-    return <Table
-      loading={loading}
-      dataSource={data}
-      columns={columns}
-      rowKey={(record) => (record.number)}
-      style={{background: 'white'}}
+    const rowSelection = {
+      selectedRowKeys,
+      onChange: this.onSelectChange,
+      hideDefaultSelections: true,
+      selections: [
+        {
+          key: 'odd',
+          text: 'Select Odd Row',
+          onSelect: (changableRowKeys: Array<number>) => {
+            let newSelectedRowKeys = [];
+            newSelectedRowKeys = changableRowKeys.filter((key: number, index: number) => {
+              if (index % 2 !== 0) {
+                return false;
+              }
+              return true;
+            });
+            this.setState({selectedRowKeys: newSelectedRowKeys});
+          },
+        },
+        {
+          key: 'even',
+          text: 'Select Even Row',
+          onSelect: (changableRowKeys: Array<number>) => {
+            let newSelectedRowKeys = [];
+            newSelectedRowKeys = changableRowKeys.filter((key, index) => {
+              if (index % 2 !== 0) {
+                return true;
+              }
+              return false;
+            });
+            this.setState({selectedRowKeys: newSelectedRowKeys});
+          },
+        },
+      ],
+    };
+    return (<>
+      <p>
+        <Button type="danger" style={{marginRight: 10}} disabled={selectedRowKeys.length > 1 ? false : true}>
+          批量删除
+        </Button>
+        <Button type="primary" icon="plus">
+          新建
+        </Button>
+      </p>
+      <Table
+        loading={loading}
+        dataSource={data}
+        columns={columns}
+        rowSelection={rowSelection}
+        rowKey={(record) => (record.number)}
+        style={{background: 'white'}}
     />
+    </>)
   }
 }
 
